@@ -9,9 +9,28 @@ Class DBConnection{
         $name = getenv('DB_NAME') ?: 'spms_db';
         $port = getenv('DB_PORT') ? (int)getenv('DB_PORT') : 3306;
 
-        $this->db = new mysqli($host, $user, $pass, $name, $port);
-        if($this->db->connect_error){
-            die("Database Connection Error: " . $this->db->connect_error);
+        // Aiven MySQL requires SSL. Auto-detect Aiven or DB_SSL flag.
+        $use_ssl = (getenv('DB_SSL') === 'true' || getenv('DB_SSL') === '1' || stripos($host, 'aivencloud.com') !== false);
+
+        $this->db = mysqli_init();
+
+        if(!$this->db){
+            die("Database Initialization Error: mysqli_init failed.");
+        }
+
+        if($use_ssl){
+            // Enable SSL for cloud MySQL providers like Aiven
+            $this->db->ssl_set(NULL, NULL, NULL, NULL, NULL);
+            if(defined('MYSQLI_OPT_SSL_VERIFY_SERVER_CERT')){
+                $this->db->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, false);
+            }
+            @$connected = $this->db->real_connect($host, $user, $pass, $name, $port, NULL, MYSQLI_CLIENT_SSL);
+        } else {
+            @$connected = $this->db->real_connect($host, $user, $pass, $name, $port);
+        }
+
+        if(!$connected || $this->db->connect_error){
+            die("Database Connection Error (" . $this->db->connect_errno . "): " . $this->db->connect_error);
         }
     }
     function connection(){
