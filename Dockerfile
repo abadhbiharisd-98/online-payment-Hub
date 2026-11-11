@@ -16,6 +16,11 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html/spms
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
     && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
+# Configure Apache to not leak internal ports in redirects
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
+    && echo "UseCanonicalName Off" >> /etc/apache2/apache2.conf \
+    && echo "UseCanonicalPhysicalPort Off" >> /etc/apache2/apache2.conf
+
 # Enable Apache rewrite module
 RUN a2enmod rewrite
 
@@ -33,4 +38,3 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 80
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-

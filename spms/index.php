@@ -1,3 +1,3 @@
 <?php 
-header("location:./admin");
-?>
+header("Location: ./admin/");
+exit;

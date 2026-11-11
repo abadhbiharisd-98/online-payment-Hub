@@ -32,6 +32,19 @@ Class DBConnection{
         if(!$connected || $this->db->connect_error){
             die("Database Connection Error (" . $this->db->connect_errno . "): " . $this->db->connect_error);
         }
+
+        // Auto-initialize database tables if not yet created on cloud
+        $table_check = @$this->db->query("SHOW TABLES LIKE 'admin_list'");
+        if($table_check && $table_check->num_rows === 0){
+            $sql_file = __DIR__ . '/db/spms_db.sql';
+            if(file_exists($sql_file)){
+                $sql_content = file_get_contents($sql_file);
+                if(!empty($sql_content)){
+                    $this->db->multi_query($sql_content);
+                    while($this->db->more_results() && $this->db->next_result()){;}
+                }
+            }
+        }
     }
     function connection(){
         return $this->db;

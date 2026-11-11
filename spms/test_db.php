@@ -42,18 +42,31 @@ echo "Server Version: " . $db->server_info . "\n\n";
 
 // Check tables
 $result = $db->query("SHOW TABLES");
+$count = 0;
 if($result){
-    echo "Tables found in database '$name':\n";
-    $count = 0;
     while($row = $result->fetch_row()){
-        echo " - " . $row[0] . "\n";
         $count++;
     }
-    if($count === 0){
-        echo " (No tables found yet. Auto-import will run on startup)\n";
+}
+
+if($count === 0){
+    echo "No tables found. Importing spms_db.sql now...\n";
+    $sql_file = __DIR__ . '/db/spms_db.sql';
+    if(file_exists($sql_file)){
+        $sql = file_get_contents($sql_file);
+        $db->multi_query($sql);
+        while($db->more_results() && $db->next_result()){;}
+        echo "Import completed!\n\n";
     }
-} else {
-    echo "Could not fetch tables: " . $db->error . "\n";
+}
+
+// Fetch tables again
+$result2 = $db->query("SHOW TABLES");
+if($result2){
+    echo "Tables present in database '$name':\n";
+    while($row = $result2->fetch_row()){
+        echo " - " . $row[0] . "\n";
+    }
 }
 
 $db->close();
