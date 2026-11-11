@@ -33,21 +33,22 @@ Class DBConnection{
             die("Database Connection Error (" . $this->db->connect_errno . "): " . $this->db->connect_error);
         }
 
-        // Auto-initialize database tables if not yet created on cloud
-        $table_check = @$this->db->query("SHOW TABLES LIKE 'admin_list'");
+        // Auto-initialize all database tables if employee_list or department_list is missing
+        $table_check = @$this->db->query("SHOW TABLES LIKE 'employee_list'");
         if($table_check && $table_check->num_rows === 0){
             $sql_file = __DIR__ . '/db/spms_db.sql';
             if(file_exists($sql_file)){
                 $sql_content = file_get_contents($sql_file);
                 if(!empty($sql_content)){
-                    try {
-                        @$this->db->query("SET SESSION sql_require_primary_key = OFF;");
-                    } catch(\Throwable $e){}
-                    try {
-                        $this->db->multi_query($sql_content);
-                        while($this->db->more_results() && $this->db->next_result()){;}
-                    } catch(\Throwable $e){
-                        error_log("Database initialization: " . $e->getMessage());
+                    $queries = preg_split('/;\s*[\r\n]+/', $sql_content);
+                    foreach($queries as $query){
+                        $query = trim($query);
+                        if(empty($query)) continue;
+                        try {
+                            $this->db->query($query);
+                        } catch(\Throwable $e){
+                            // Continue on any notice/duplicate
+                        }
                     }
                 }
             }

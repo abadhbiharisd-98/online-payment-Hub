@@ -40,34 +40,26 @@ if(!$conn || $db->connect_error){
 echo "SUCCESS: Connected successfully to MySQL server!\n";
 echo "Server Version: " . $db->server_info . "\n\n";
 
-// Check tables
-$result = $db->query("SHOW TABLES");
-$count = 0;
-if($result){
-    while($row = $result->fetch_row()){
-        $count++;
-    }
-}
-
-if($count === 0){
-    echo "No tables found. Importing modern primary-key compatible spms_db.sql now...\n";
-    $sql_file = __DIR__ . '/db/spms_db.sql';
-    if(file_exists($sql_file)){
-        $sql = file_get_contents($sql_file);
+// Run full importer statement by statement
+$sql_file = __DIR__ . '/db/spms_db.sql';
+if(file_exists($sql_file)){
+    $sql_content = file_get_contents($sql_file);
+    // Split into individual SQL statements
+    $queries = preg_split('/;\s*[\r\n]+/', $sql_content);
+    echo "Executing " . count($queries) . " statements from spms_db.sql...\n";
+    foreach($queries as $query){
+        $query = trim($query);
+        if(empty($query)) continue;
         try {
-            @$db->query("SET SESSION sql_require_primary_key = OFF;");
-        } catch(\Throwable $e){}
-        try {
-            $db->multi_query($sql);
-            while($db->more_results() && $db->next_result()){;}
-            echo "Import executed successfully!\n\n";
+            $db->query($query);
         } catch(\Throwable $e){
-            echo "Import notice: " . $e->getMessage() . "\n\n";
+            echo "Notice on query (" . substr($query, 0, 40) . "...): " . $e->getMessage() . "\n";
         }
     }
+    echo "Import execution finished.\n\n";
 }
 
-// Fetch tables again
+// Fetch tables
 $result2 = $db->query("SHOW TABLES");
 if($result2){
     echo "Tables present in database '$name':\n";
