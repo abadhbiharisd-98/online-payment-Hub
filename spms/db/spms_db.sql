@@ -31,7 +31,7 @@ ON DUPLICATE KEY UPDATE `admin_id`=`admin_id`;
 CREATE TABLE IF NOT EXISTS `department_list` (
   `department_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` text NOT NULL,
-  `status` text NOT NULL DEFAULT '0',
+  `status` varchar(50) NOT NULL DEFAULT '0',
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
