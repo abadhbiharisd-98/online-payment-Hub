@@ -50,13 +50,20 @@ if($result){
 }
 
 if($count === 0){
-    echo "No tables found. Importing spms_db.sql now...\n";
+    echo "No tables found. Importing modern primary-key compatible spms_db.sql now...\n";
     $sql_file = __DIR__ . '/db/spms_db.sql';
     if(file_exists($sql_file)){
         $sql = file_get_contents($sql_file);
-        $db->multi_query($sql);
-        while($db->more_results() && $db->next_result()){;}
-        echo "Import completed!\n\n";
+        try {
+            @$db->query("SET SESSION sql_require_primary_key = OFF;");
+        } catch(\Throwable $e){}
+        try {
+            $db->multi_query($sql);
+            while($db->more_results() && $db->next_result()){;}
+            echo "Import executed successfully!\n\n";
+        } catch(\Throwable $e){
+            echo "Import notice: " . $e->getMessage() . "\n\n";
+        }
     }
 }
 

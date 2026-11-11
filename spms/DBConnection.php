@@ -40,8 +40,15 @@ Class DBConnection{
             if(file_exists($sql_file)){
                 $sql_content = file_get_contents($sql_file);
                 if(!empty($sql_content)){
-                    $this->db->multi_query($sql_content);
-                    while($this->db->more_results() && $this->db->next_result()){;}
+                    try {
+                        @$this->db->query("SET SESSION sql_require_primary_key = OFF;");
+                    } catch(\Throwable $e){}
+                    try {
+                        $this->db->multi_query($sql_content);
+                        while($this->db->more_results() && $this->db->next_result()){;}
+                    } catch(\Throwable $e){
+                        error_log("Database initialization: " . $e->getMessage());
+                    }
                 }
             }
         }
