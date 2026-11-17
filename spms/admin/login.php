@@ -13,7 +13,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOGIN | Simple Payroll System</title>
+    <title>LOGIN | Online Payment Hub</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/popper.min.js"></script>
@@ -28,7 +28,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 <body class="bg-dark bg-gradient">
    <div class="h-100 d-flex jsutify-content-center align-items-center">
        <div class='w-100'>
-        <h3 class="py-5 text-center text-light">Simple Payroll System</h3>
+        <h3 class="py-5 text-center text-light">Online Payment Hub</h3>
         <div class="card my-3 col-md-4 offset-md-4">
             <div class="card-body">
                 <form action="" id="login-form">

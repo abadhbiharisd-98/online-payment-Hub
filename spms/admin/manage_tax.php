@@ -14,7 +14,7 @@ $qry = $conn->query("SELECT * FROM `tax_table_list` where tax_id = '{$_GET['id']
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="payroll_type" class="control-label">Payroll Type</label>
+                        <label for="payroll_type" class="control-label">Payment Type</label>
                         <select name="payroll_type" id="payroll_type" class="form-select form-select-sm rounded-0">
                             <option value="1" <?php echo (isset($payroll_type) && $payroll_type == 1 ) ? 'selected' : '' ?>>Monthly</option>
                             <option value="2" <?php echo (isset($payroll_type) && $payroll_type == 2 ) ? 'selected' : '' ?>>Semi-Monthly</option>

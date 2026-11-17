@@ -23,7 +23,7 @@ $qry = $conn->query("SELECT * FROM `payroll_list` where payroll_id = '{$_GET['id
 </style>
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title"><?php echo isset($_GET['id'])? "Update" :"Create New" ?> Employee's Payroll</h5>
+        <h5 class="card-title"><?php echo isset($_GET['id'])? "Update" :"Create New" ?> Employee Payment</h5>
     </div>
     <div class="card-body">
         <div class="container-fluid">
@@ -33,14 +33,14 @@ $qry = $conn->query("SELECT * FROM `payroll_list` where payroll_id = '{$_GET['id
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="payroll_type" class="control-label">Payroll Type</label>
+                            <label for="payroll_type" class="control-label">Payment Type</label>
                             <select name="payroll_type" id="payroll_type" class="form-select form-select-sm rounded-0">
                                 <option value="1" <?php echo (isset($payroll_type) && $payroll_type == 1 ) ? 'selected' : '' ?>>Monthly</option>
                                 <option value="2" <?php echo (isset($payroll_type) && $payroll_type == 2 ) ? 'selected' : '' ?>>Semi-Monthly</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="payroll_month" class="control-label">Payroll Month</label>
+                            <label for="payroll_month" class="control-label">Payment Month</label>
                             <input type="month" name="payroll_month" id="payroll_month" class="form-control form-control-sm rounded 0 text-end" value="<?php echo isset($payroll_month) ? $payroll_month : 0 ?>" required>
                         </div>
                         <div class="form-group">

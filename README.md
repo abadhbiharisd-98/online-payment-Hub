@@ -1,6 +1,6 @@
-# Simple Payroll Management System (SPMS)
+# Online Payment Hub (SPMS)
 
-A web-based Payroll Management System built with PHP and MySQL, deployed with Docker on Render and connected to Aiven Cloud MySQL.
+A web-based Payment Management System built with PHP and MySQL, deployed with Docker on Render and connected to Aiven Cloud MySQL.
 
 ---
 
@@ -18,10 +18,10 @@ A web-based Payroll Management System built with PHP and MySQL, deployed with Do
 
 ## ✨ Features
 
-- **Dashboard:** Overview of active employees, departments, and payroll summaries.
+- **Dashboard:** Overview of active employees, departments, and payment summaries.
 - **Employee Management:** Add, edit, view, and delete employee profiles with photos and monthly salaries.
 - **Department & Designation:** Manage company departments and employee designations.
-- **Payroll Processing:** Automated payroll calculations including present days, overtime, undertime/late deductions, gross pay, and net pay.
+- **Payment Processing:** Automated payment calculations including present days, overtime, undertime/late deductions, gross pay, and net pay.
 - **Dynamic Tax Table:** Configurable tax brackets (fixed tax + percentage over) effective by dates.
 - **Earnings & Deductions:** Support for custom earnings (allowances) and deductions (Cash Advance, SSS, HMDF, PhilHealth).
 - **User Management:** Admin account creation and credential management.

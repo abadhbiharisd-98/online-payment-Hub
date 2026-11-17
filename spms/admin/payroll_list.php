@@ -12,9 +12,9 @@
 </style>
 <div class="card">
     <div class="card-header d-flex justify-content-between">
-        <h3 class="card-title">Employee Payroll</h3>
+        <h3 class="card-title">Employee Payments</h3>
         <div class="card-tools align-middle">
-            <a class="btn btn-dark btn-sm py-1 rounded-0" href="./?page=manage_payroll" id="create_new">Add New</a>
+            <a class="btn btn-dark btn-sm py-1 rounded-0" href="./?page=manage_payroll" id="create_new">Add New Payment</a>
         </div>
     </div>
     <div class="card-body">
@@ -33,7 +33,7 @@
                     <th class="text-center p-0">#</th>
                     <th class="text-center p-0">Date Created</th>
                     <th class="text-center p-0">Employee</th>
-                    <th class="text-center p-0">Payroll Type</th>
+                    <th class="text-center p-0">Payment Type</th>
                     <th class="text-center p-0">Month</th>
                     <th class="text-center p-0">Net Pay</th>
                     <th class="text-center p-0">Action</th>
@@ -62,7 +62,7 @@
                             Action
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <li><a class="dropdown-item view_data" href="./?page=view_payroll&id=<?php echo $row['payroll_id'] ?>" data-id = '<?php echo $row['payroll_id'] ?>'>View Details</a></li>
+                            <li><a class="dropdown-item view_data" href="./?page=view_payroll&id=<?php echo $row['payroll_id'] ?>" data-id = '<?php echo $row['payroll_id'] ?>'>View Payment Details</a></li>
                             <li><a class="dropdown-item" data-id = '<?php echo $row['payroll_id'] ?>' href="./?page=manage_payroll&id=<?php echo $row['payroll_id'] ?>">Edit</a></li>
                             <li><a class="dropdown-item delete_data" data-id = '<?php echo $row['payroll_id'] ?>' data-name='<?php echo $row['name'] ?>' href="javascript:void(0)">Delete</a></li>
                             </ul>
@@ -77,10 +77,10 @@
 <script>
     $(function(){
         $('.edit_data').click(function(){
-            uni_modal('Edit payroll Details',"manage_payroll.php?id="+$(this).attr('data-id'),'large')
+            uni_modal('Edit Payment Details',"manage_payroll.php?id="+$(this).attr('data-id'),'large')
         })
         $('.view_data').click(function(){
-            uni_modal('payroll Details',"view_payroll.php?id="+$(this).attr('data-id'),'large')
+            uni_modal('Payment Details',"view_payroll.php?id="+$(this).attr('data-id'),'large')
         })
         $('.delete_data').click(function(){
             _conf("Are you sure to delete <b>"+$(this).attr('data-name')+"</b>\'s from payslip?",'delete_data',[$(this).attr('data-id')])

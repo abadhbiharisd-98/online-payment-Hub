@@ -91,7 +91,7 @@ try {
                 👋 Welcome back, <?php echo htmlspecialchars($_SESSION['fullname'] ?? 'Administrator'); ?>!
             </h2>
             <p class="mb-0 text-white-50">
-                Simple Payroll Management Dashboard &bull; <?php echo date("l, d F Y"); ?>
+                Online Payment Hub Dashboard &bull; <?php echo date("l, d F Y"); ?>
             </p>
         </div>
         <div class="mt-3 mt-md-0 d-flex gap-2">
@@ -99,7 +99,7 @@ try {
                 <i class="fa fa-user-plus text-primary me-1"></i> Add Employee
             </a>
             <a href="./?page=manage_payroll" class="btn btn-warning btn-sm fw-semibold shadow-sm px-3 py-2 text-dark">
-                <i class="fa fa-calculator me-1"></i> New Payroll
+                <i class="fa fa-calculator me-1"></i> New Payment
             </a>
         </div>
     </div>
@@ -170,7 +170,7 @@ try {
                         <i class="fa fa-file-invoice-dollar"></i>
                     </div>
                     <div class="flex-grow-1">
-                        <div class="text-muted small fw-medium text-uppercase">Payrolls Run</div>
+                        <div class="text-muted small fw-medium text-uppercase">Payments Run</div>
                         <div class="h3 fw-bold mb-0 text-dark"><?php echo number_format($payroll_count); ?></div>
                     </div>
                     <i class="fa fa-chevron-right text-muted opacity-25"></i>
@@ -187,10 +187,10 @@ try {
         <div class="card border-0 shadow-sm rounded-3 h-100">
             <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
                 <h5 class="card-title mb-0 fw-bold text-dark">
-                    <i class="fa fa-history text-primary me-2"></i> Recent Payroll Activity
+                    <i class="fa fa-history text-primary me-2"></i> Recent Payment Activity
                 </h5>
                 <a href="./?page=payroll_list" class="btn btn-outline-primary btn-sm rounded-pill px-3">
-                    View All Payrolls <i class="fa fa-arrow-right ms-1"></i>
+                    View All Payments <i class="fa fa-arrow-right ms-1"></i>
                 </a>
             </div>
             <div class="card-body p-0">
@@ -200,7 +200,7 @@ try {
                             <tr>
                                 <th class="ps-3 py-3">Employee</th>
                                 <th class="py-3">Month</th>
-                                <th class="py-3">Payroll Type</th>
+                                <th class="py-3">Payment Type</th>
                                 <th class="py-3 text-end">Net Pay</th>
                                 <th class="text-center pe-3 py-3">Action</th>
                             </tr>
@@ -235,7 +235,7 @@ try {
                                     ₹<?php echo number_format($row['net_pay'], 2); ?>
                                 </td>
                                 <td class="text-center pe-3">
-                                    <a href="./?page=view_payroll&id=<?php echo $row['payroll_id']; ?>" class="btn btn-sm btn-outline-secondary rounded-pill px-2 py-1" title="View Payroll Details">
+                                    <a href="./?page=view_payroll&id=<?php echo $row['payroll_id']; ?>" class="btn btn-sm btn-outline-secondary rounded-pill px-2 py-1" title="View Payment Details">
                                         <i class="fa fa-eye"></i> View
                                     </a>
                                 </td>
@@ -247,9 +247,9 @@ try {
                             <tr>
                                 <td colspan="5" class="text-center py-5 text-muted">
                                     <i class="fa fa-file-invoice fa-3x mb-3 text-secondary opacity-50"></i>
-                                    <p class="mb-2">No payroll records generated yet.</p>
+                                    <p class="mb-2">No payment records generated yet.</p>
                                     <a href="./?page=manage_payroll" class="btn btn-sm btn-primary rounded-pill px-3">
-                                        <i class="fa fa-plus me-1"></i> Create First Payroll
+                                        <i class="fa fa-plus me-1"></i> Create First Payment
                                     </a>
                                 </td>
                             </tr>
@@ -277,7 +277,7 @@ try {
                 </a>
                 <a href="./?page=manage_payroll" class="quick-link-btn">
                     <i class="fa fa-calculator text-success"></i>
-                    <span>Process Payroll</span>
+                    <span>Process Payment</span>
                 </a>
                 <a href="./?page=tax_table" class="quick-link-btn">
                     <i class="fa fa-table text-warning"></i>

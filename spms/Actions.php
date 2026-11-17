@@ -532,10 +532,10 @@ Class Actions extends DBConnection{
         if($save){
             $resp['status']="success";
             if(empty($id)){
-                $resp['msg'] = "Employee\'s Payroll successfully saved.";
+                $resp['msg'] = "Employee\'s Payment successfully saved.";
                 $payroll_id = $this->db->insert_id;
             }else{
-                $resp['msg'] = "Employee\'s Payroll successfully updated.";
+                $resp['msg'] = "Employee\'s Payment successfully updated.";
                 $payroll_id = $id;
             }
             $resp['id'] = $payroll_id;
@@ -564,9 +564,9 @@ Class Actions extends DBConnection{
         }else{
             $resp['status']="failed";
             if(empty($id))
-                $resp['msg'] = "Saving New Employee\'s Payroll Failed.";
+                $resp['msg'] = "Saving New Employee\'s Payment Failed.";
             else
-                $resp['msg'] = "Updating Employee\'s Payroll Failed.";
+                $resp['msg'] = "Updating Employee\'s Payment Failed.";
                 $resp['error']=$this->error;
         }
 
@@ -579,7 +579,7 @@ Class Actions extends DBConnection{
         if($delete){
             $resp['status']='success';
             $_SESSION['flashdata']['type'] = 'success';
-            $_SESSION['flashdata']['msg'] = 'Employee\'s Payroll successfully deleted.';
+            $_SESSION['flashdata']['msg'] = 'Employee\'s Payment successfully deleted.';
         }else{
             $resp['status']='failed';
             $resp['error']=$this->error;

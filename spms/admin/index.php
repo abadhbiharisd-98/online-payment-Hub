@@ -17,7 +17,7 @@ if($_SESSION['type'] != 1 && in_array($page,array('maintenance','admin','manage_
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo ucwords(str_replace('_',' ',$page)) ?> | Simple Payroll System</title>
+    <title><?php echo ucwords(str_replace('_',' ',$page)) ?> | Online Payment Hub</title>
     <link rel="stylesheet" href="../fontawesome/css/all.min.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../summernote/summernote-lite.min.css">
@@ -133,7 +133,7 @@ if($_SESSION['type'] != 1 && in_array($page,array('maintenance','admin','manage_
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient" id="topNavBar">
         <div class="container">
             <a class="navbar-brand" href="./">
-            Simple Payroll System
+            Online Payment Hub
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -147,7 +147,7 @@ if($_SESSION['type'] != 1 && in_array($page,array('maintenance','admin','manage_
                         <a class="nav-link  <?php echo ($page == 'employees')? 'active' : '' ?>" href="./?page=employees"><i class="fa fa-user-tie"></i> Employees</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  <?php echo ($page == 'payroll_list')? 'active' : '' ?>" href="./?page=payroll_list"><i class="fa fa-th-list"></i> Payroll</a>
+                        <a class="nav-link  <?php echo ($page == 'payroll_list')? 'active' : '' ?>" href="./?page=payroll_list"><i class="fa fa-credit-card"></i> Payments</a>
                     </li>
                     <?php if($_SESSION['type'] == 1): ?>
                     <li class="nav-item">

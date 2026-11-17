@@ -36,7 +36,7 @@ $qry = $conn->query("SELECT p.*,CONCAT(e.lastname , ', ' , e.firstname , ' ' , C
 </style>
 <div class="card">
     <div class="card-header d-flex">
-        <h5 class="card-title flex-grow-1">Payslip</h5>
+        <h5 class="card-title flex-grow-1">Payment Slip</h5>
         <div class="w-auto d-flex justify-content-end">
             <button type="button" class="btn btn-sm btn-success rounded-0 me-2" id="print"><i class="fa fa-print"></i> Print</button>
             <a class="btn btn-sm btn-dark rounded-0" href="./?page=payroll_list">Back</a>
@@ -58,9 +58,9 @@ $qry = $conn->query("SELECT p.*,CONCAT(e.lastname , ', ' , e.firstname , ' ' , C
                     </div>
                     <div class="col-6">
                         <dl>
-                            <dt><b>Payroll Type</b></dt>
+                            <dt><b>Payment Type</b></dt>
                             <dd><?php echo $payroll_type == 1 ? "Monthly" : "Semi-Monthly" ?></dd>
-                            <dt><b>Payroll Month</b></dt>
+                            <dt><b>Payment Month</b></dt>
                             <dd><?php echo date("F, Y",strtotime($payroll_month)) ?></dd>
                             <dt><b>Basic</b></dt>
                             <dd><?php echo $payroll_type == 1 ? number_format($monthly_rate,2) : number_format($monthly_rate /2,2) ?></dd>

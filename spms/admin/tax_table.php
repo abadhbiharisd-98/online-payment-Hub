@@ -30,7 +30,7 @@
             <thead>
                 <tr>
                     <th class="text-center p-0">#</th>
-                    <th class="text-center p-0">Payroll Type</th>
+                    <th class="text-center p-0">Payment Type</th>
                     <th class="text-center p-0">Compensation Range</th>
                     <th class="text-center p-0">Prescribed Withholding Tax</th>
                     <th class="text-center p-0">Effective Date</th>
