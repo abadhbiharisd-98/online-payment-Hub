@@ -13,7 +13,10 @@
                             <div class="fs-5"><b>Department</b></div>
                             <div class="fs-6 text-end fw-bold">
                                 <?php 
-                                $department = $conn->query("SELECT count(department_id) as `count` FROM `department_list` where status = 1 ")->fetch_array()['count'];
+                                try {
+                                    $department_qry = $conn->query("SELECT count(department_id) as `count` FROM `department_list` where status = 1 ");
+                                    $department = ($department_qry && $r = $department_qry->fetch_array()) ? $r['count'] : 0;
+                                } catch(\Throwable $e){ $department = 0; }
                                 echo $department > 0 ? number_format($department) : 0 ;
                                 ?>
                             </div>
@@ -33,7 +36,10 @@
                             <div class="fs-5"><b>Designation</b></div>
                             <div class="fs-6 text-end fw-bold">
                                 <?php 
-                                $designation = $conn->query("SELECT count(designation_id) as `count` FROM `designation_list` where status = 1 ")->fetch_array()['count'];
+                                try {
+                                    $designation_qry = $conn->query("SELECT count(designation_id) as `count` FROM `designation_list` where status = 1 ");
+                                    $designation = ($designation_qry && $r = $designation_qry->fetch_array()) ? $r['count'] : 0;
+                                } catch(\Throwable $e){ $designation = 0; }
                                 echo $designation > 0 ? number_format($designation) : 0 ;
                                 ?>
                             </div>
@@ -53,7 +59,10 @@
                             <div class="fs-5"><b>Employees</b></div>
                             <div class="fs-6 text-end fw-bold">
                                 <?php 
-                                $employees = $conn->query("SELECT count(employee_id) as `count` FROM `employee_list` where status = 1 ")->fetch_array()['count'];
+                                try {
+                                    $employees_qry = $conn->query("SELECT count(employee_id) as `count` FROM `employee_list` where status = 1 ");
+                                    $employees = ($employees_qry && $r = $employees_qry->fetch_array()) ? $r['count'] : 0;
+                                } catch(\Throwable $e){ $employees = 0; }
                                 echo $employees > 0 ? number_format($employees) : 0 ;
                                 ?>
                             </div>
@@ -73,7 +82,10 @@
                             <div class="fs-5"><b>Users</b></div>
                             <div class="fs-6 text-end fw-bold">
                                 <?php 
-                                $admin = $conn->query("SELECT count(admin_id) as `count` FROM `admin_list`")->fetch_array()['count'];
+                                try {
+                                    $admin_qry = $conn->query("SELECT count(admin_id) as `count` FROM `admin_list`");
+                                    $admin = ($admin_qry && $r = $admin_qry->fetch_array()) ? $r['count'] : 0;
+                                } catch(\Throwable $e){ $admin = 0; }
                                 echo $admin > 0 ? number_format($admin) : 0 ;
                                 ?>
                             </div>

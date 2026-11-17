@@ -59,6 +59,19 @@ if(file_exists($sql_file)){
     echo "Import execution finished.\n\n";
 }
 
+// Ensure status column exists in employee_list
+$col_check = @$db->query("SHOW COLUMNS FROM `employee_list` LIKE 'status'");
+if($col_check && $col_check->num_rows === 0){
+    echo "Adding missing 'status' column to employee_list...\n";
+    try {
+        $db->query("ALTER TABLE `employee_list` ADD COLUMN `status` tinyint(1) NOT NULL DEFAULT 1 AFTER `monthly_salary`");
+        $db->query("UPDATE `employee_list` SET `status` = 1 WHERE `status` IS NULL");
+        echo "Successfully added 'status' column to employee_list!\n\n";
+    } catch(\Throwable $e){
+        echo "Notice on adding status column: " . $e->getMessage() . "\n\n";
+    }
+}
+
 // Fetch tables
 $result2 = $db->query("SHOW TABLES");
 if($result2){

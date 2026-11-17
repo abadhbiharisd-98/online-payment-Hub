@@ -81,14 +81,15 @@ CREATE TABLE IF NOT EXISTS `employee_list` (
   `department_id` int(11) NOT NULL,
   `designation_id` int(11) NOT NULL,
   `monthly_salary` double NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
   KEY `department_id` (`department_id`),
   KEY `designation_id` (`designation_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `employee_list` (`employee_id`, `code`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `email`, `contact`, `address`, `department_id`, `designation_id`, `monthly_salary`, `date_created`) VALUES
-(1, '2022-0001', 'John', 'D', 'Smith', 'Male', '1997-06-23', 'jsmith@sample.com', '09123456789', 'Sample Address Only', 1, 1, 45000, '2022-02-10 07:42:25'),
-(2, '2022-0002', 'Claire', 'G', 'Blake', 'Female', '1995-10-14', 'cblake@sample.com', '09456789123', 'Sample Address 2', 2, 3, 35000, '2022-02-10 07:54:15')
+INSERT INTO `employee_list` (`employee_id`, `code`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `email`, `contact`, `address`, `department_id`, `designation_id`, `monthly_salary`, `status`, `date_created`) VALUES
+(1, '2022-0001', 'John', 'D', 'Smith', 'Male', '1997-06-23', 'jsmith@sample.com', '09123456789', 'Sample Address Only', 1, 1, 45000, 1, '2022-02-10 07:42:25'),
+(2, '2022-0002', 'Claire', 'G', 'Blake', 'Female', '1995-10-14', 'cblake@sample.com', '09456789123', 'Sample Address 2', 2, 3, 35000, 1, '2022-02-10 07:54:15')
 ON DUPLICATE KEY UPDATE `employee_id`=`employee_id`;
 
 -- --------------------------------------------------------

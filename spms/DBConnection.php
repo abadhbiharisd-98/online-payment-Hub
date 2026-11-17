@@ -53,6 +53,15 @@ Class DBConnection{
                 }
             }
         }
+
+        // Auto-migrate: ensure employee_list has the status column
+        $col_check = @$this->db->query("SHOW COLUMNS FROM `employee_list` LIKE 'status'");
+        if($col_check && $col_check->num_rows === 0){
+            try {
+                @$this->db->query("ALTER TABLE `employee_list` ADD COLUMN `status` tinyint(1) NOT NULL DEFAULT 1 AFTER `monthly_salary`");
+                @$this->db->query("UPDATE `employee_list` SET `status` = 1 WHERE `status` IS NULL");
+            } catch(\Throwable $e){}
+        }
     }
     function connection(){
         return $this->db;
