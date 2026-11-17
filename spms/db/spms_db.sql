@@ -98,6 +98,7 @@ ON DUPLICATE KEY UPDATE `employee_id`=`employee_id`;
 CREATE TABLE IF NOT EXISTS `payroll_list` (
   `payroll_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `employee_id` int(11) NOT NULL,
+  `payroll_type` tinyint(1) NOT NULL DEFAULT 1,
   `payroll_month` varchar(50) NOT NULL,
   `salary` double NOT NULL DEFAULT 0,
   `present` double NOT NULL DEFAULT 0,
@@ -116,8 +117,8 @@ CREATE TABLE IF NOT EXISTS `payroll_list` (
   KEY `employee_id` (`employee_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `payroll_list` (`payroll_id`, `employee_id`, `payroll_month`, `salary`, `present`, `absent`, `late_undertime`, `late_undertime_deduction`, `overtime`, `overtime_amount`, `total_earnings`, `total_deduction`, `taxable_income`, `gross_income`, `withholding_tax`, `net_pay`, `date_created`) VALUES
-(2, 1, '2022-02', 45000, 11, 0, 12, 51.136, 15, 76.705, 76.705, 2330.136, 22449.605, 22526.31, 323.238, 19872.936, '2022-02-10 08:01:37')
+INSERT INTO `payroll_list` (`payroll_id`, `employee_id`, `payroll_type`, `payroll_month`, `salary`, `present`, `absent`, `late_undertime`, `late_undertime_deduction`, `overtime`, `overtime_amount`, `total_earnings`, `total_deduction`, `taxable_income`, `gross_income`, `withholding_tax`, `net_pay`, `date_created`) VALUES
+(2, 1, 1, '2022-02', 45000, 11, 0, 12, 51.136, 15, 76.705, 76.705, 2330.136, 22449.605, 22526.31, 323.238, 19872.936, '2022-02-10 08:01:37')
 ON DUPLICATE KEY UPDATE `payroll_id`=`payroll_id`;
 
 -- --------------------------------------------------------

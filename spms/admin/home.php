@@ -228,7 +228,7 @@ try {
                                 </td>
                                 <td>
                                     <span class="badge bg-info bg-opacity-10 text-info">
-                                        <?php echo $row['payroll_type'] == 1 ? "Monthly" : "Semi-Monthly"; ?>
+                                        <?php echo ($row['payroll_type'] ?? 1) == 1 ? "Monthly" : "Semi-Monthly"; ?>
                                     </span>
                                 </td>
                                 <td class="text-end fw-bold text-success font-monospace">

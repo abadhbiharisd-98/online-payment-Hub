@@ -46,7 +46,7 @@
                 ?>
                 <tr>
                     <td class="text-center p-0"><?php echo $i++; ?></td>
-                    <td class="py-0 px-1"><?php echo $row['payroll_type'] == 1 ? "Monthly" : "Semi-Monthly" ?></td>
+                    <td class="py-0 px-1"><?php echo ($row['payroll_type'] ?? 1) == 1 ? "Monthly" : "Semi-Monthly" ?></td>
                     <td class="py-0 px-1 text-end"><?php echo number_format($row['range_from']). ' - '. number_format($row['range_to']) ?></td>
                     <td class="py-0 px-1 text-end"><?php echo number_format($row['fixed_tax']). ' + '. $row['percentage_over']."% above ".$row['range_from'] ?></td>
                     <td class="py-0 px-1 text-end"><?php echo date("Y-m-d",strtotime($row['effective_date'])) ?></td>

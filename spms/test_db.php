@@ -72,6 +72,19 @@ if($col_check && $col_check->num_rows === 0){
     }
 }
 
+// Ensure payroll_type column exists in payroll_list
+$col_check2 = @$db->query("SHOW COLUMNS FROM `payroll_list` LIKE 'payroll_type'");
+if($col_check2 && $col_check2->num_rows === 0){
+    echo "Adding missing 'payroll_type' column to payroll_list...\n";
+    try {
+        $db->query("ALTER TABLE `payroll_list` ADD COLUMN `payroll_type` tinyint(1) NOT NULL DEFAULT 1 AFTER `employee_id`");
+        $db->query("UPDATE `payroll_list` SET `payroll_type` = 1 WHERE `payroll_type` IS NULL");
+        echo "Successfully added 'payroll_type' column to payroll_list!\n\n";
+    } catch(\Throwable $e){
+        echo "Notice on adding payroll_type column: " . $e->getMessage() . "\n\n";
+    }
+}
+
 // Fetch tables
 $result2 = $db->query("SHOW TABLES");
 if($result2){

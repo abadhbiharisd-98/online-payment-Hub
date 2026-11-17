@@ -59,11 +59,11 @@ $qry = $conn->query("SELECT p.*,CONCAT(e.lastname , ', ' , e.firstname , ' ' , C
                     <div class="col-6">
                         <dl>
                             <dt><b>Payment Type</b></dt>
-                            <dd><?php echo $payroll_type == 1 ? "Monthly" : "Semi-Monthly" ?></dd>
+                            <dd><?php echo ($payroll_type ?? 1) == 1 ? "Monthly" : "Semi-Monthly" ?></dd>
                             <dt><b>Payment Month</b></dt>
                             <dd><?php echo date("F, Y",strtotime($payroll_month)) ?></dd>
                             <dt><b>Basic</b></dt>
-                            <dd><?php echo $payroll_type == 1 ? number_format($monthly_rate,2) : number_format($monthly_rate /2,2) ?></dd>
+                            <dd><?php echo ($payroll_type ?? 1) == 1 ? number_format($monthly_rate ?? $salary ?? 0, 2) : number_format(($monthly_rate ?? $salary ?? 0) / 2, 2) ?></dd>
                         </dl>
                     </div>
                 </div>

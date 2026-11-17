@@ -62,6 +62,15 @@ Class DBConnection{
                 @$this->db->query("UPDATE `employee_list` SET `status` = 1 WHERE `status` IS NULL");
             } catch(\Throwable $e){}
         }
+
+        // Auto-migrate: ensure payroll_list has the payroll_type column
+        $col_check2 = @$this->db->query("SHOW COLUMNS FROM `payroll_list` LIKE 'payroll_type'");
+        if($col_check2 && $col_check2->num_rows === 0){
+            try {
+                @$this->db->query("ALTER TABLE `payroll_list` ADD COLUMN `payroll_type` tinyint(1) NOT NULL DEFAULT 1 AFTER `employee_id`");
+                @$this->db->query("UPDATE `payroll_list` SET `payroll_type` = 1 WHERE `payroll_type` IS NULL");
+            } catch(\Throwable $e){}
+        }
     }
     function connection(){
         return $this->db;
